@@ -25,13 +25,22 @@ def dashboard_view(request):
 @login_required
 def update_account_view(request):
     if request.method == 'POST':
-        template_name = None
         user_form = UserAdminChangeForm(request.POST, instance=request.user)
         if user_form.is_valid():
-            user_form.save() 
-
+            user_form.save()
+            context = {
+                'status': 'success',
+                'heading': 'Changed', 
+                'description': 'Your account information has been updated successfully.'
+            }
+        else:
+            context = {
+                'status': 'error',
+                'heading': 'Error', 
+                'description': 'There was an error updating your account information. Please try again.'
+            }
         
-        html_content = render_to_string('partials/alert_message.html', {'heading': 'Changed', 'description': 'Your account information has been updated successfully.'})
+        html_content = render_to_string('partials/alert_message.html', context)
 
         return JsonResponse({
             'username': request.user.username,

@@ -51,7 +51,6 @@
                 const sidebarUsername = document.getElementById('sidebar-username');
                 const sidebarAvatarOrFirstLetter = document.getElementById('sidebar-avatar-first-letter');
                 const sidebarEmail = document.getElementById('sidebar-email');
-                console.log(event.detail.xhr.response)
                 if (sidebarUsername && sidebarEmail && sidebarAvatarOrFirstLetter) {
                     const responseData = JSON.parse(event.detail.xhr.response);
                     console.log(responseData);
