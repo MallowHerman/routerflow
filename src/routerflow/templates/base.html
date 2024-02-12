@@ -53,10 +53,9 @@
                 const sidebarEmail = document.getElementById('sidebar-email');
                 if (sidebarUsername && sidebarEmail && sidebarAvatarOrFirstLetter) {
                     const responseData = JSON.parse(event.detail.xhr.response);
-                    console.log(responseData);
                     sidebarUsername.textContent = responseData.username;
                     sidebarEmail.textContent = responseData.email;
-                    sidebarAvatarOrFirstLetter.textContent = responseData.avatar_or_first_letter
+                    sidebarAvatarOrFirstLetter.textContent = responseData.avatar_or_first_letter.toUpperCase()
                     alertMessageDiv.innerHTML = responseData.html
                 }
             }
