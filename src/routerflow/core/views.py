@@ -35,11 +35,12 @@ def dashboard_view(request):
 def update_account_view(request):
     if request.method == 'POST':
         user = request.user
+        user_profile = user.profile
         user_account_form = UserAccountForm(request.POST, instance=user)
         if user_account_form.is_valid():
             user_account_form.save()
-            language = request.POST
-            print(f'Language: {user_account_form}')
+            user_profile.language = request.POST.get('language')
+            user_profile.save()
             context = {
                 'status': 'success',
                 'heading': 'Changed', 

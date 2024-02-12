@@ -1770,6 +1770,10 @@ input:checked + .toggle-bg {
   text-align: center;
 }
 
+.text-start {
+  text-align: start;
+}
+
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;

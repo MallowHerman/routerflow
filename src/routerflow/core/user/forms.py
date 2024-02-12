@@ -20,12 +20,10 @@ class UserAccountForm(forms.ModelForm):
         self.fields['username'].label = 'Username'
         self.fields['language'].label = 'Interface language'
 
-    def save(self, commit: bool = ...) -> Any:
-        user = super(UserAccountForm, self).save(commit=False)
-        language_selected = self.cleaned_data['language']
-        user_profile = user.profile
-        user_profile.language = language_selected
-        user_profile.save()
+        try:
+            user_profile = self.instance.profile
+            self.fields['language'].initial = user_profile.language
+        except UserProfile.DoesNotExist:
+            pass
 
-        return user
         
