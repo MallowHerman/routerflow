@@ -19,3 +19,6 @@ class UserProfile(BaseModel):
         choices=TelegramNotificationFrequencyOptions.choices,
         default=TelegramNotificationFrequencyOptions.INSTANT,
     )
+
+    def __str__(self) -> str:
+        return f"{self.user.username}'s profile"
