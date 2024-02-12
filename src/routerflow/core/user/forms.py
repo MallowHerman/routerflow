@@ -7,10 +7,9 @@ from core.models import UserProfile
 User = get_user_model()
 
 class UserAccountForm(forms.ModelForm):
-    language = forms.ChoiceField(choices=settings.LANGUAGES)
     class Meta:
         model = User
-        fields = ['username', 'language']
+        fields = ['username']
     
 
     def __init__(self, *args, **kwargs):
@@ -18,12 +17,4 @@ class UserAccountForm(forms.ModelForm):
 
         # Personalize os rótulos dos campos, se necessário
         self.fields['username'].label = 'Username'
-        self.fields['language'].label = 'Interface language'
-
-        try:
-            user_profile = self.instance.profile
-            self.fields['language'].initial = user_profile.language
-        except UserProfile.DoesNotExist:
-            pass
-
         

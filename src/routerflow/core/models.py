@@ -20,13 +20,6 @@ class UserProfile(BaseModel):
         choices=TelegramNotificationFrequencyOptions.choices,
         default=TelegramNotificationFrequencyOptions.INSTANT,
     )
-    language = models.TextField(
-        max_length=10,
-        choices=settings.LANGUAGES,
-        default=settings.LANGUAGE_CODE,
-        help_text="An ISO 639 language code (with optional variant) "
-        "selected by the user. Ex: en-GB.",
-    )
 
     def __str__(self) -> str:
         return f"{self.user.username}'s profile"

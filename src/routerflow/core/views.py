@@ -7,17 +7,9 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.template.loader import render_to_string
 from django.utils.translation import gettext as _
-from django.utils.translation import gettext, get_language, activate
+from django.utils import translation
 
 User = get_user_model()
-
-def translate(language):
-    current_language = get_language()
-    try:
-        activate(language)
-
-    finally:
-        activate(current_language)
 
 def home_view(request):
     return redirect('dashboard')
