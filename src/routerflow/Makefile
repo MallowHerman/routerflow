@@ -6,3 +6,6 @@ migrations:
 
 runserver:
 	$(DJANGO_MANAGE) runserver
+
+watch:
+	npx tailwindcss -i ./static/tw/input.css -o ./static/tw/output.css --watch
