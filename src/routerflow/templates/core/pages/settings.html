@@ -5,7 +5,6 @@
         <div class="space-y-0.5 flex justify-between items-center">
             <div>
                 <h2 class="text-2xl font-bold tracking-tight">{% trans "Settings" %}</h2>
-                <p>{% trans "Hello world" %}</p>
             </div>
             <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="settings-modal">
                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -14,18 +13,20 @@
                 <span class="sr-only">Close modal</span>
             </button>
         </div>
-        <div data-orientation="horizontal" role="none" class="shrink-0 border-b h-[1px] w-full my-6"></div>
+        <div data-orientation="horizontal" role="none" class="shrink-0 border-b h-[1px] w-full my-2"></div>
         <div class="flex flex-col space-y-8 lg:flex-row lg:space-x-12 lg:space-y-0">
             <aside class="-mx-4 lg:w-1/4">
                 <nav class="flex space-x-2 lg:flex-col lg:space-x-0 lg:space-y-1">
-                        <button  
+                        <button
+                            id="account-tab-button"
                             class="inline-flex items-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground h-9 px-4 py-2 hover:bg-gray-100 justify-start" 
                             x-bind:class="activeTab == 'Account' ? 'bg-gray-200' : ''"
                             @click="activeTab = 'Account'"
                         >
                         {% trans "Account" %}
                         </button>
-                        <button 
+                        <button
+                            hx-get="{% url 'settings_modal_password' %}" hx-target="#settingsContent" hx-swap="outerHTML"
                             class="inline-flex items-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:text-accent-foreground h-9 px-4 py-2 hover:bg-gray-100 justify-start" 
                             x-bind:class="activeTab == 'Password' ? 'bg-gray-200' : ''"
                             @click="activeTab = 'Password'"
