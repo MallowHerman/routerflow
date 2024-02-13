@@ -1,0 +1,87 @@
+
+{% load compress %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <title>Django + Tailwind CSS + Flowbite</title>
+
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'tw/output.css' %}">
+    {% endcompress %}
+
+    <style>
+        .htmx-update-account-indicator{
+        display:none;
+        }
+        .htmx-request .htmx-update-account-indicator{
+            display:inline;
+        }
+        .htmx-request.htmx-update-account-indicator{
+            display:inline;
+        }
+    </style>
+
+</head>
+
+<body>
+    {% include 'partials/sidebar.html' %}
+    <div class="p-4 sm:ml-64">
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+    <div id="settings-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative w-full max-w-3xl max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                {% include 'core/pages/settings.html'%}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+    <script>
+        function SettingsTab() {
+            return {
+                activeTab: 'Account',
+            }
+        }
+    </script>
+    <script>
+        function settingsTabTelegram() {
+            return {
+                addApiToken: false,
+            }
+        }
+    </script>
+    <script>
+        document.addEventListener('htmx:afterSwap', function(event) {
+            if (event.detail.target.id === 'alert-message') {
+                // Atualize os elementos do sidebar com os dados recebidos do servidor
+                const alertMessageDiv = document.getElementById('alert-message');
+                const sidebarUsername = document.getElementById('sidebar-username');
+                const sidebarAvatarOrFirstLetter = document.getElementById('sidebar-avatar-first-letter');
+                const sidebarEmail = document.getElementById('sidebar-email');
+                if (sidebarUsername && sidebarEmail && sidebarAvatarOrFirstLetter) {
+                    const responseData = JSON.parse(event.detail.xhr.response);
+                    
+                    sidebarUsername.textContent = responseData.username;
+                    sidebarAvatarOrFirstLetter.textContent = responseData.avatar_or_first_letter.toUpperCase()
+                    alertMessageDiv.innerHTML = responseData.html
+                }
+            }
+    });
+    </script>
+    {% block extra_head %}
+    {% endblock extra_head %}
+</body>
+
+</html>
