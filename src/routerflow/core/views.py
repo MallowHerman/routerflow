@@ -8,6 +8,7 @@ from django.contrib.auth import get_user_model
 from django.template.loader import render_to_string
 from django.utils.translation import gettext as _
 from django.utils import translation
+from time import sleep
 
 User = get_user_model()
 

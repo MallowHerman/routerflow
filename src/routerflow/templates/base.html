@@ -17,6 +17,18 @@
     <link rel="stylesheet" href="{% static 'tw/output.css' %}">
     {% endcompress %}
 
+    <style>
+        .htmx-update-account-indicator{
+        display:none;
+        }
+        .htmx-request .htmx-update-account-indicator{
+            display:inline;
+        }
+        .htmx-request.htmx-update-account-indicator{
+            display:inline;
+        }
+    </style>
+
 </head>
 
 <body>
