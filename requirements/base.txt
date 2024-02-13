@@ -5,18 +5,63 @@
 #    pip-compile requirements/base.in
 #
 asgiref==3.7.2
-    # via django
+    # via
+    #   django
+    #   django-htmx
+certifi==2024.2.2
+    # via requests
+cffi==1.16.0
+    # via cryptography
+charset-normalizer==3.3.2
+    # via requests
+cryptography==42.0.2
+    # via pyjwt
+defusedxml==0.7.1
+    # via python3-openid
 django==4.2.10
     # via
     #   -r requirements/base.in
+    #   django-allauth
     #   django-appconf
+    #   django-htmx
+django-allauth==0.61.1
+    # via -r requirements/base.in
 django-appconf==1.0.6
     # via django-compressor
 django-compressor==4.4
     # via -r requirements/base.in
+django-environ==0.11.2
+    # via -r requirements/base.in
+django-htmx==1.17.2
+    # via -r requirements/base.in
+django-widget-tweaks==1.5.0
+    # via -r requirements/base.in
+idna==3.6
+    # via requests
+oauthlib==3.2.2
+    # via requests-oauthlib
+pycparser==2.21
+    # via cffi
+pyjwt[crypto]==2.8.0
+    # via
+    #   django-allauth
+    #   pyjwt
+pytelegrambotapi==4.15.4
+    # via -r requirements/base.in
+python3-openid==3.2.0
+    # via django-allauth
 rcssmin==1.1.1
     # via django-compressor
+requests==2.31.0
+    # via
+    #   django-allauth
+    #   pytelegrambotapi
+    #   requests-oauthlib
+requests-oauthlib==1.3.1
+    # via django-allauth
 rjsmin==1.2.1
     # via django-compressor
 sqlparse==0.4.4
     # via django
+urllib3==2.2.0
+    # via requests
